@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX MOTORS - Contact Us</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;700&display=swap');
+    :root { --font-primary: 'Inter', sans-serif; --font-display: 'Orbitron', monospace; --color-background: #0A0A0A; --color-surface: #121212; --color-text: #EAEAEA; --color-accent-orange: #ff6b35; --color-accent-gold: #FFD700; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-primary); background-color: var(--color-background); color: var(--color-text); }
+    .main-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; z-index: 100; background: rgba(10, 10, 10, 0.5); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .header-logo { text-decoration: none; }
+    .header-logo h1 { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.1em; background: linear-gradient(90deg, var(--color-accent-orange), var(--color-accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    /* Corrected Nav Styles */
+    .main-nav a { color: var(--color-text); text-decoration: none; margin-left: 3rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9rem; position: relative; padding-bottom: 8px; transition: color 0.3s ease; }
+    .main-nav a::after { content: ''; position: absolute; width: 100%; height: 2px; background: var(--color-accent-orange); bottom: 0; left: 0; transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+    .main-nav a:hover { color: var(--color-accent-orange); }
+    .main-nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .main-nav a.active { color: var(--color-accent-orange); }
+    .main-nav a.active::after { transform: scaleX(1); }
+
+    .page-content { padding: 10rem 4rem 4rem; max-width: 1200px; margin: 0 auto; } .page-title { text-align: center; font-family: var(--font-display); font-size: 3rem; margin-bottom: 3rem; letter-spacing: 0.1em; } .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: flex-start; } .contact-info, .contact-form { background: var(--color-surface); padding: 2.5rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); } .contact-info h3 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1.5rem; } .contact-info p { color: #b3b3b3; line-height: 1.8; margin-bottom: 1.5rem; } .info-item { display: flex; align-items: center; margin-bottom: 1rem; } .info-item span { font-weight: bold; margin-left: 1rem; letter-spacing: 0.05em; } .form-group { margin-bottom: 1.5rem; } .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; } .form-group input, .form-group textarea { width: 100%; background: #0A0A0A; border: 1px solid rgba(255,255,255,0.2); color: var(--color-text); padding: 0.8rem 1rem; border-radius: 5px; font-family: var(--font-primary); font-size: 1rem; transition: border-color 0.3s, box-shadow 0.3s; } .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--color-accent-orange); box-shadow: 0 0 10px rgba(255,107,53,0.3); } textarea { resize: vertical; min-height: 150px; } .submit-btn { display: inline-block; width: 100%; font-family: var(--font-display); text-decoration: none; color: var(--color-text); border: 2px solid var(--color-accent-orange); background: transparent; padding: 0.8rem 2rem; border-radius: 50px; transition: all 0.4s ease; font-size: 1rem; cursor: pointer; } .submit-btn:hover { background: var(--color-accent-orange); color: #000; box-shadow: 0 0 25px var(--color-accent-orange); } .main-footer { text-align: center; padding: 2rem; background: var(--color-surface); margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    @media (max-width: 900px) { .main-header { padding: 1.5rem 2rem; } .main-nav { display: none; } .page-content { padding: 8rem 2rem 2rem; } .contact-container { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <a href="splash_screen.html" class="header-logo"><h1>APEX MOTORS</h1></a>
+    <nav class="main-nav">
+      <a href="showroom.html">Showroom</a><a href="about.html">About</a><a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page-content">
+    <h2 class="page-title">Get In Touch</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p>Our team is available to assist with inquiries, private viewings, and consultations. Please reach out to us via your preferred method.</p>
+        <div class="info-item">📧<span>sales@apexmotors.luxe</span></div>
+        <div class="info-item">📞<span>+1 (555) 123-4567</span></div>
+        <div class="info-item">📍<span>123 Apex Drive, Metropolis, 90210</span></div>
+      </div>
+      <form class="contact-form">
+        <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" required></div>
+        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required></div>
+        <div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" required></div>
+        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <p>&copy; 2024 APEX MOTORS. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>

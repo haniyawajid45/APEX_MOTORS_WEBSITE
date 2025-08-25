@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX MOTORS - Showroom</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;700&display=swap');
+    :root { 
+      --font-primary: 'Inter', sans-serif; 
+      --font-display: 'Orbitron', monospace; 
+      --color-background: #0A0A0A; 
+      --color-text: #EAEAEA; 
+      --color-accent-orange: #ff6b35; 
+      --color-accent-gold: #FFD700; 
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body { 
+      font-family: var(--font-primary); 
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #0d0d0d 50%, #000000 100%);
+      color: var(--color-text); 
+      height: 100vh; 
+      overflow: hidden; 
+      position: relative;
+    }
+    
+    /* Enhanced Animated Background */
+    .animated-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    /* Floating geometric shapes */
+    .bg-shape {
+      position: absolute;
+      opacity: 0.03;
+      animation: float 20s infinite linear;
+    }
+    
+    .bg-shape.circle {
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--color-accent-orange), transparent);
+    }
+    
+    .bg-shape.triangle {
+      width: 0;
+      height: 0;
+      background: transparent;
+      border-style: solid;
+    }
+    
+    .bg-shape.diamond {
+      transform: rotate(45deg);
+      background: linear-gradient(45deg, var(--color-accent-gold), transparent);
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(360deg); }
+    }
+    
+    /* Particle system */
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 107, 53, 0.6);
+      border-radius: 50%;
+      animation: particleFloat 15s infinite linear;
+    }
+    
+    @keyframes particleFloat {
+      0% { 
+        transform: translateY(100vh) translateX(0px);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { 
+        transform: translateY(-50px) translateX(100px);
+        opacity: 0;
+      }
+    }
+    
+    /* Subtle grid overlay */
+    .grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 107, 53, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 107, 53, 0.02) 1px, transparent 1px);
+      background-size: 100px 100px;
+      animation: gridMove 30s infinite linear;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100px, 100px); }
+    }
+    
+    /* Glowing orbs */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: orbFloat 25s infinite ease-in-out;
+    }
+    
+    .orb-1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.1), transparent);
+      top: 20%;
+      left: 10%;
+      animation-delay: -10s;
+    }
+    
+    .orb-2 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.08), transparent);
+      top: 60%;
+      right: 15%;
+      animation-delay: -15s;
+    }
+    
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.06), transparent);
+      bottom: 20%;
+      left: 70%;
+      animation-delay: -5s;
+    }
+    
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -30px) scale(1.1); }
+      50% { transform: translate(-30px, 50px) scale(0.9); }
+      75% { transform: translate(40px, 20px) scale(1.05); }
+    }
+    
+    /* Subtle scanline effect */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.01) 0px,
+        transparent 2px,
+        transparent 4px,
+        rgba(255, 255, 255, 0.01) 6px
+      );
+      animation: scanlineMove 0.1s infinite linear;
+      pointer-events: none;
+    }
+    
+    @keyframes scanlineMove {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(6px); }
+    }
+    
+    .main-header { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 2rem 4rem; 
+      z-index: 100; 
+      background: rgba(10, 10, 10, 0.5); 
+      backdrop-filter: blur(10px); 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+      animation: fadeInDown 1.2s cubic-bezier(0.25, 1, 0.5, 1); 
+    }
+    
+    .header-logo { 
+      text-decoration: none; 
+      transition: transform 0.3s ease; 
+    }
+    
+    .header-logo:hover { 
+      transform: scale(1.05); 
+    }
+    
+    .header-logo h1 { 
+      font-family: var(--font-display); 
+      font-size: 1.8rem; 
+      font-weight: 700; 
+      letter-spacing: 0.1em; 
+      background: linear-gradient(90deg, var(--color-accent-orange), var(--color-accent-gold)); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+    }
+    
+    .main-nav a { 
+      color: var(--color-text); 
+      text-decoration: none; 
+      margin-left: 3rem; 
+      font-weight: 500; 
+      letter-spacing: 0.12em; 
+      text-transform: uppercase; 
+      font-size: 0.9rem; 
+      position: relative; 
+      padding-bottom: 8px; 
+      transition: color 0.3s ease; 
+    }
+    
+    .main-nav a:hover { 
+      color: var(--color-accent-orange); 
+    }
+    
+    .main-nav a::after { 
+      content: ''; 
+      position: absolute; 
+      width: 100%; 
+      height: 2px; 
+      background: var(--color-accent-orange); 
+      bottom: 0; 
+      left: 0; 
+      transform: scaleX(0); 
+      transform-origin: right; 
+      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); 
+    }
+    
+    .main-nav a:hover::after { 
+      transform: scaleX(1); 
+      transform-origin: left; 
+    }
+    
+    .slider-container { 
+      position: relative; 
+      width: 100%; 
+      height: 100%; 
+      overflow: hidden; 
+      cursor: grab; 
+    }
+    
+    .slider-container.grabbing { 
+      cursor: grabbing; 
+    }
+    
+    .slider-track { 
+      display: flex; 
+      height: 100%; 
+      will-change: transform; 
+    }
+    
+    .slider-track.transitioning { 
+      transition: transform 0.8s cubic-bezier(0.82, 0, 0.18, 1); 
+    }
+    
+    .slide { 
+      width: 100vw; 
+      height: 100vh; 
+      flex-shrink: 0; 
+      position: relative; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 6rem 4rem; 
+      transform: scale(0.95); 
+      opacity: 0.7; 
+      transition: transform 0.8s cubic-bezier(0.82, 0, 0.18, 1), opacity 0.8s; 
+    }
+    
+    .slide.active { 
+      transform: scale(1); 
+      opacity: 1; 
+    }
+    
+    .car-container { 
+      display: grid; 
+      grid-template-columns: 0.9fr 1.1fr; 
+      align-items: center; 
+      gap: 4rem; 
+      width: 100%; 
+      max-width: 1300px; 
+      z-index: 2; 
+    }
+    
+    /* Enhanced animations for text elements */
+    .slide .car-details { 
+      opacity: 0; 
+      transform: translateX(-60px); 
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    
+    .slide .car-image { 
+      opacity: 0; 
+      transform: translateX(60px) scale(0.9); 
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    
+    .slide.active .car-details { 
+      opacity: 1; 
+      transform: translateX(0); 
+      transition-delay: 0.3s; 
+    }
+    
+    .slide.active .car-image { 
+      opacity: 1; 
+      transform: translateX(0) scale(1); 
+      transition-delay: 0.1s; 
+    }
+    
+    /* Individual element animations */
+    .car-details .year, .car-details h2, .car-details .description, .car-details .cta-button { 
+      opacity: 0; 
+      transform: translateY(25px); 
+    }
+    
+    .slide.active .car-details .year { 
+      animation: slideUpFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; 
+    }
+    
+    .slide.active .car-details h2 { 
+      animation: slideUpFadeIn 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards; 
+    }
+    
+    .slide.active .car-details .description { 
+      animation: slideUpFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards; 
+    }
+    
+    .slide.active .car-details .cta-button { 
+      animation: slideUpFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.1s forwards; 
+    }
+    
+    @keyframes slideUpFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Enhanced image hover effects */
+    .car-image { 
+      cursor: pointer; 
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    
+    .car-image:hover { 
+      transform: translateX(0) scale(1.05) translateY(-10px); 
+    }
+    
+    .car-image img { 
+      width: 100%; 
+      max-width: 600px; 
+      -webkit-user-drag: none; 
+      user-select: none; 
+      pointer-events: none; 
+      filter: drop-shadow(0 25px 30px rgba(0,0,0,0.5)); 
+      transition: filter 0.4s ease, transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    
+    .car-image:hover img { 
+      filter: drop-shadow(0 35px 45px rgba(0,0,0,0.4)) drop-shadow(0 0 30px rgba(255, 107, 53, 0.3)); 
+      transform: rotateY(5deg); 
+    }
+    
+    /* Enhanced year text animation */
+    .car-details .year { 
+      font-size: 0.9rem; 
+      font-weight: 500; 
+      letter-spacing: 0.2em; 
+      text-transform: uppercase; 
+      color: var(--color-accent-orange); 
+      margin-bottom: 0.5rem; 
+      position: relative; 
+    }
+    
+    .car-details .year::after { 
+      content: ''; 
+      position: absolute; 
+      width: 0; 
+      height: 1px; 
+      background: var(--color-accent-orange); 
+      bottom: -5px; 
+      left: 0; 
+      transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    
+    .slide.active .car-details .year::after { 
+      width: 60px; 
+      animation-delay: 0.8s; 
+      animation-duration: 0.6s; 
+      animation-fill-mode: forwards; 
+    }
+    
+    /* Enhanced heading animation */
+    .car-details h2 { 
+      font-family: var(--font-display); 
+      font-size: clamp(2rem, 5vw, 3.5rem); 
+      margin: 0.5rem 0; 
+      background: linear-gradient(135deg, var(--color-text), var(--color-accent-gold)); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+    }
+    
+    /* Enhanced description animation */
+    .car-details .description { 
+      margin-bottom: 2rem; 
+      max-width: 500px; 
+      line-height: 1.7; 
+      color: rgba(234, 234, 234, 0.8); 
+    }
+    
+    /* Enhanced CTA button animation */
+    .cta-button { 
+      display: inline-block; 
+      font-family: var(--font-display); 
+      text-decoration: none; 
+      color: var(--color-text); 
+      border: 2px solid var(--color-accent-orange); 
+      padding: 0.8rem 2rem; 
+      border-radius: 50px; 
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+      position: relative; 
+      overflow: hidden; 
+    }
+    
+    .cta-button::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: -100%; 
+      width: 100%; 
+      height: 100%; 
+      background: var(--color-accent-orange); 
+      transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+      z-index: -1; 
+    }
+    
+    .cta-button:hover::before { 
+      left: 0; 
+    }
+    
+    .cta-button:hover { 
+      color: #000; 
+      box-shadow: 0 0 25px var(--color-accent-orange); 
+      transform: translateY(-2px); 
+    }
+    
+    /* SLIDER NAV STYLES */
+    .slider-nav {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      z-index: 50;
+    }
+
+    .slider-nav button {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slider-nav button:hover {
+      background: var(--color-accent-orange);
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--color-accent-orange);
+    }
+
+    .slider-pagination {
+      position: absolute;
+      bottom: 3.2rem;
+      right: 3rem;
+      display: flex;
+      gap: 12px;
+      z-index: 50;
+    }
+    
+    .pagination-dot { 
+      width: 10px; 
+      height: 10px; 
+      border-radius: 50%; 
+      background: rgba(255, 255, 255, 0.3); 
+      cursor: pointer; 
+      transition: background 0.3s, transform 0.3s; 
+    }
+    
+    .pagination-dot.active { 
+      background: var(--color-accent-orange); 
+      transform: scale(1.3); 
+    }
+    
+    .lightbox { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: rgba(0, 0, 0, 0.95); 
+      backdrop-filter: blur(15px); 
+      z-index: 1000; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      opacity: 0; 
+      visibility: hidden; 
+      transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s; 
+    }
+    
+    .lightbox.active { 
+      opacity: 1; 
+      visibility: visible; 
+    }
+    
+    .lightbox-content { 
+      position: relative; 
+      max-width: 90%; 
+      max-height: 90%; 
+      animation: lightboxContentIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both; 
+    }
+    
+    .lightbox-image { 
+      max-width: 100%; 
+      max-height: 85vh; 
+      opacity: 0; 
+      transform: scale(0.9) translateY(20px); 
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+      border-radius: 12px; 
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); 
+    }
+    
+    .lightbox-image.active { 
+      opacity: 1; 
+      transform: scale(1) translateY(0); 
+    }
+    
+    .lightbox-close { 
+      position: absolute; 
+      top: -50px; 
+      right: -10px; 
+      color: rgba(255, 255, 255, 0.8); 
+      font-size: 2.5rem; 
+      cursor: pointer; 
+      width: 50px; 
+      height: 50px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      border-radius: 50%; 
+      background: rgba(255, 255, 255, 0.1); 
+      backdrop-filter: blur(10px); 
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+      animation: fadeInScale 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both; 
+    }
+    
+    .lightbox-close:hover { 
+      color: white; 
+      background: var(--color-accent-orange); 
+      transform: scale(1.1); 
+      box-shadow: 0 0 20px var(--color-accent-orange); 
+    }
+    
+    .lightbox-nav { 
+      position: absolute; 
+      top: 50%; 
+      left: -80px; 
+      right: -80px; 
+      transform: translateY(-50%); 
+      display: flex; 
+      justify-content: space-between; 
+    }
+    
+    .lightbox-nav button { 
+      background: rgba(255, 255, 255, 0.1); 
+      backdrop-filter: blur(10px); 
+      border: 1px solid rgba(255, 255, 255, 0.2); 
+      border-radius: 50%; 
+      color: rgba(255, 255, 255, 0.8); 
+      font-size: 2rem; 
+      cursor: pointer; 
+      width: 60px; 
+      height: 60px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+      opacity: 0; 
+      transform: translateY(-50%) scale(0.8); 
+    }
+    
+    .lightbox.active .lightbox-nav button { 
+      opacity: 1; 
+      transform: translateY(-50%) scale(1); 
+      animation: slideInFromSides 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both; 
+    }
+    
+    .lightbox-nav button:hover { 
+      color: white; 
+      background: var(--color-accent-orange); 
+      transform: translateY(-50%) scale(1.1); 
+      box-shadow: 0 0 20px var(--color-accent-orange); 
+    }
+    
+    .lightbox-nav button:first-child { 
+      animation-delay: 0.3s; 
+    }
+    
+    .lightbox-nav button:last-child { 
+      animation-delay: 0.35s; 
+    }
+    
+    .lightbox-counter { 
+      position: absolute; 
+      bottom: -50px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      font-family: var(--font-display); 
+      letter-spacing: 0.1em; 
+      color: rgba(255,255,255,0.7); 
+      background: rgba(255, 255, 255, 0.1); 
+      backdrop-filter: blur(10px); 
+      padding: 8px 16px; 
+      border-radius: 20px; 
+      border: 1px solid rgba(255, 255, 255, 0.2); 
+      opacity: 0; 
+      animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s both; 
+    }
+
+    @keyframes lightboxContentIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideInFromSides {
+      from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-20px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0) scale(1);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* Image transition animations */
+    .lightbox-image.transitioning-out {
+      opacity: 0;
+      transform: scale(0.95) translateX(-30px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .lightbox-image.transitioning-in {
+      opacity: 0;
+      transform: scale(0.95) translateX(30px);
+      animation: imageSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+    }
+
+    @keyframes imageSlideIn {
+      to {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+      }
+    }
+    
+    @keyframes fadeInDown { 
+      from { 
+        opacity: 0; 
+        transform: translateY(-30px); 
+      } 
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      } 
+    }
+    
+    @media (max-width: 900px) { 
+      .main-header { 
+        padding: 1.5rem 2rem; 
+      } 
+      .main-nav { 
+        display: none; 
+      } 
+      .slide { 
+        padding: 6rem 1.5rem 4rem; 
+      } 
+      .car-container { 
+        grid-template-columns: 1fr; 
+        text-align: center; 
+        gap: 1rem; 
+      } 
+      .car-image { 
+        order: 1; 
+      } 
+      .car-details { 
+        order: 2; 
+      } 
+      .car-details .description { 
+        margin: 0 auto 1.5rem auto; 
+      } 
+      .slider-nav { 
+        left: 1.5rem; 
+      } 
+      .slider-pagination { 
+        right: 1.5rem; 
+      } 
+      .lightbox-nav { 
+        left: -20px; 
+        right: -20px; 
+      } 
+      .lightbox-nav button { 
+        font-size: 2.5rem; 
+      } 
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body style="opacity: 0; transition: opacity 2s cubic-bezier(0.19, 1, 0.22, 1);">
+
+  <!-- Enhanced animated background -->
+  <div class="animated-background">
+    <!-- Glowing orbs -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    
+    <!-- Grid overlay -->
+    <div class="grid-overlay"></div>
+    
+    <!-- Subtle scanline effect -->
+    <div class="scanlines"></div>
+  </div>
+
+  <header class="main-header">
+    <a href="splash_screen.html" class="header-logo"><h1>APEX MOTORS</h1></a>
+    <nav class="main-nav">
+      <a href="showroom.html">Showroom</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="slider-container"><div class="slider-track"></div></div>
+  <div class="slider-nav">
+    <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+    <button id="next-btn"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="slider-pagination"></div>
+  <div class="lightbox"><div class="lightbox-content"><img src="" alt="Detailed car view" class="lightbox-image" id="lightbox-image"><span class="lightbox-close">&times;</span><div class="lightbox-nav"><button class="lightbox-prev">&lt;</button><button class="lightbox-next">&gt;</button></div><div class="lightbox-counter"></div></div></div>
+
+<script>
+const carData = [
+    { year: 'Ferrari', name: 'F8 Tributo', shortName: 'F8', shortDescription: 'A celebration of excellence and a tribute to the most powerful V8 in Ferrari history.', images: [ 'images/Ferrari_F8_21_1.jpg', 'images/Ferrari_F8_21_2.jpg', 'images/Ferrari_F8_21_3.jpg', 'images/Ferrari_F8_21_4.jpg', 'images/Ferrari_F8_21_5.jpg', 'images/Ferrari_F8_21_6.jpg' ] },
+    { year: 'McLaren', name: 'GT by MSO', shortName: 'GT', shortDescription: 'A bespoke creation by McLaren Special Operations, combining comfort with lightweight agility.', images: [ 'images/GT_by_MSO__77_1.jpg', 'images/GT_by_MSO__77_2.jpg', 'images/GT_by_MSO__77_3.jpg', 'images/GT_by_MSO__77_4.jpg', 'images/GT_by_MSO__77_5.jpg', 'images/GT_by_MSO__77_6.jpg', 'images/GT_by_MSO__77_7.jpg' ] },
+    { year: 'Mercedes-AMG', name: 'G63', shortName: 'G63', shortDescription: 'An icon of off-road performance with a commanding presence and handcrafted luxury.', images: [ 'images/G63_AMG_1.jpg', 'images/G63_AMG_2.jpg', 'images/G63_AMG_3.jpg', 'images/G63_AMG_4.jpg', 'images/G63_AMG_5.jpg', 'images/G63_AMG_6.jpg' ] },
+    { year: 'Bentley', name: 'Continental GT', shortName: 'GT', shortDescription: 'Experience open-air grand touring with elegant design and thrilling performance.', images: [ 'images/GT_Convertible_1.jpg', 'images/GT_Convertible_2.jpg', 'images/GT_Convertible_3.jpg', 'images/GT_Convertible_4.jpg', 'images/GT_Convertible_5.jpg' ] },
+    { year: 'Lamborghini', name: 'Huracán EVO', shortName: 'EVO', shortDescription: 'Engineered to amplify your driving experience with a powerful V10 engine for pure emotion.', images: [ 'images/Huracán_EVO_1.jpg', 'images/Huracán_EVO_2.jpg', 'images/Huracán_EVO_3.jpg', 'images/Huracán_EVO_4.jpg', 'images/Huracán_EVO_5.jpg', 'images/Huracán_EVO_6.jpg' ] },
+    { year: 'Rolls-Royce', name: 'Phantom SWB', shortName: 'PHANTOM', shortDescription: 'The pinnacle of automotive luxury and comfort. A sanctuary of bespoke craftsmanship.', images: [ 'images/RR_Phantom_SWB_22.jpg', 'images/RR_Phantom_SWB_22_2.jpg', 'images/RR_Phantom_SWB_22_3.jpg', 'images/RR_Phantom_SWB_22_4.jpg', 'images/RR_Phantom_SWB_22_5.jpg', 'images/RR_Phantom_SWB_22_6.jpg' ] }
+];
+
+function goToDetail(carIndex) {
+    // Store the selected car index for detail page
+    sessionStorage.setItem('selectedCarIndex', carIndex);
+    window.location.href = 'detail.html';
+}
+
+// Enhanced background animation system
+function createBackgroundElements() {
+    const background = document.querySelector('.animated-background');
+    
+    // Create floating geometric shapes
+    for (let i = 0; i < 8; i++) {
+        const shape = document.createElement('div');
+        shape.className = 'bg-shape';
+        
+        const shapeType = ['circle', 'diamond'][Math.floor(Math.random() * 2)];
+        shape.classList.add(shapeType);
+        
+        const size = Math.random() * 60 + 20;
+        shape.style.width = size + 'px';
+        shape.style.height = size + 'px';
+        shape.style.left = Math.random() * 100 + '%';
+        shape.style.animationDelay = Math.random() * 20 + 's';
+        shape.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        
+        if (shapeType === 'triangle') {
+            const borderSize = size / 2;
+            shape.style.borderLeft = borderSize + 'px solid transparent';
+            shape.style.borderRight = borderSize + 'px solid transparent';
+            shape.style.borderBottom = borderSize + 'px solid rgba(255, 107, 53, 0.05)';
+            shape.style.width = '0';
+            shape.style.height = '0';
+        }
+        
+        background.appendChild(shape);
+    }
+    
+    // Create particle system
+    for (let i = 0; i < 50; i++) {
+        const shape = document.createElement('div');
+        shape.className = 'particle';
+        shape.style.left = Math.random() * 100 + '%';
+        shape.style.animationDelay = Math.random() * 20 + 's';
+        shape.style.animationDuration = (Math.random() * 5 + 10) + 's';
+        
+        background.appendChild(shape);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sliderContainer = document.querySelector('.slider-container'), 
+          track = document.querySelector('.slider-track'), 
+          paginationContainer = document.querySelector('.slider-pagination'), 
+          prevBtn = document.getElementById('prev-btn'), 
+          nextBtn = document.getElementById('next-btn'), 
+          lightbox = document.querySelector('.lightbox'), 
+          lightboxImage = document.getElementById('lightbox-image'), // Get by ID
+          lightboxCloseBtn = document.querySelector('.lightbox-close'), 
+          lightboxPrevBtn = document.querySelector('.lightbox-prev'), 
+          lightboxNextBtn = document.querySelector('.lightbox-next'), 
+          lightboxCounter = document.querySelector('.lightbox-counter'),
+          lightboxContent = document.querySelector('.lightbox-content'); // Getting the content for swipe.
+    
+    // Initialize enhanced background
+    createBackgroundElements();
+    
+    // Build slides and pagination
+    carData.forEach((car, index) => {
+        track.innerHTML += `
+            <div class="slide">
+                <div class="car-container">
+                    <div class="car-details">
+                        <p class="year">${car.year}</p>
+                        <h2>${car.name}</h2>
+                        <p class="description">${car.shortDescription}</p>
+                        <a href="javascript:goToDetail(${index})" class="cta-button">Explore Model</a>
+                    </div>
+                    <div class="car-image" data-car-index="${index}">
+                        <img src="${car.images[0]}" alt="${car.name}">
+                    </div>
+                </div>
+            </div>`;
+        paginationContainer.innerHTML += `<div class="pagination-dot" data-slide="${index}"></div>`;
+    });
+
+    const slides = [...document.querySelectorAll('.slide')];
+    const dots = [...document.querySelectorAll('.pagination-dot')];
+    let currentIndex = 0, isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0;
+
+    function updateUI() {
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentIndex);
+        });
+        dots.forEach((dot, index) => dot.classList.toggle('active', index === currentIndex));
+    }
+
+    function goToSlide(index) {
+        currentIndex = Math.max(0, Math.min(index, slides.length - 1));
+        prevTranslate = -currentIndex * window.innerWidth;
+        currentTranslate = prevTranslate;
+        track.classList.add('transitioning');
+        updateUI();
+    }
+    
+    // Lightbox functionality
+    let currentCarImages = [], currentLightboxIndex = 0;
+    
+    const openLightbox = carIndex => { 
+        currentCarImages = carData[carIndex].images; 
+        currentLightboxIndex = 0; 
+        lightboxImage.src = currentCarImages[0];
+        lightboxCounter.textContent = `1 / ${currentCarImages.length}`;
+        lightbox.classList.add('active'); 
+        setTimeout(() => {
+            lightboxImage.classList.add('active');
+        }, 200);
+    };
+    
+    const closeLightbox = () => {
+        lightboxImage.classList.remove('active');
+        setTimeout(() => {
+            lightbox.classList.remove('active');
+        }, 200);
+    };
+    
+    const showLightboxImage = () => { 
+        lightboxImage.classList.add('transitioning-out');
+        setTimeout(() => {
+            lightboxImage.src = currentCarImages[currentLightboxIndex];
+            lightboxImage.classList.remove('transitioning-out', 'active');
+            lightboxImage.classList.add('transitioning-in');
+            lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentCarImages.length}`;
+            setTimeout(() => {
+                lightboxImage.classList.remove('transitioning-in');
+                lightboxImage.classList.add('active');
+            }, 50);
+        }, 150);
+    };
+    
+    const nextLightboxImage = () => { 
+        currentLightboxIndex = (currentLightboxIndex + 1) % currentCarImages.length; 
+        showLightboxImage(); 
+    };
+    
+    const prevLightboxImage = () => { 
+        currentLightboxIndex = (currentLightboxIndex - 1 + currentCarImages.length) % currentCarImages.length; 
+        showLightboxImage(); 
+    };
+
+    // Event listeners
+    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    
+    // Pagination dots click
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Car image click for lightbox
+    track.addEventListener('click', e => { 
+        const carImg = e.target.closest('.car-image'); 
+        if (carImg) openLightbox(parseInt(carImg.dataset.carIndex)); 
+    });
+    
+    // Lightbox controls
+    lightboxCloseBtn.addEventListener('click', closeLightbox);
+    lightboxNextBtn.addEventListener('click', nextLightboxImage);
+    lightboxPrevBtn.addEventListener('click', prevLightboxImage);
+    
+    // Keyboard controls
+    window.addEventListener('keydown', e => { 
+        if (lightbox.classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevLightboxImage();
+            if (e.key === 'ArrowRight') nextLightboxImage();
+        } else {
+            if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+            if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+        }
+    });
+
+    // DRAG & SWIPE functionality
+
+    const getPositionX = e => e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    const startDrag = e => {
+      isDragging = true;
+      startPos = getPositionX(e);
+      sliderContainer.classList.add('grabbing');
+      track.classList.remove('transitioning');
+    };
+
+    const drag = e => {
+      if (isDragging) {
+        const currentPosition = getPositionX(e);
+        currentTranslate = prevTranslate + currentPosition - startPos;
+        requestAnimationFrame(updateUI);
+      }
+    };
+
+    const endDrag = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      const movedBy = currentTranslate - prevTranslate;
+
+      if (movedBy < -100 && currentIndex < slides.length - 1) {
+        goToSlide(currentIndex + 1);
+      } else if (movedBy > 100 && currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      } else {
+        goToSlide(currentIndex);
+      }
+
+      sliderContainer.classList.remove('grabbing');
+      prevTranslate = currentTranslate;
+    };
+
+    // Lightbox Swipe Functionality Starts Here
+    let lightboxStartPos = 0;
+    let lightboxIsDragging = false;
+
+    const lightboxStartDrag = e => {
+        lightboxStartPos = getPositionX(e);
+        lightboxIsDragging = true;
+    };
+
+    const lightboxDrag = e => {
+        if (!lightboxIsDragging) return;
+        e.preventDefault(); // Prevent text selection while dragging.
+    };
+
+    const lightboxEndDrag = e => {
+        if (!lightboxIsDragging) return;
+
+        const currentPos = getPositionX(e);
+        const movedBy = currentPos - lightboxStartPos;
+
+        if (movedBy < -50) {
+            nextLightboxImage();
+        } else if (movedBy > 50) {
+            prevLightboxImage();
+        }
+
+        lightboxIsDragging = false;
+    };
+    // Add swipe listener to lightbox content
+    lightboxContent.addEventListener('mousedown', lightboxStartDrag);
+    lightboxContent.addEventListener('touchstart', lightboxStartDrag, { passive: true });
+
+    lightboxContent.addEventListener('mousemove', lightboxDrag);
+    lightboxContent.addEventListener('touchmove', lightboxDrag, { passive: true });
+
+    lightboxContent.addEventListener('mouseup', lightboxEndDrag);
+    lightboxContent.addEventListener('mouseleave', lightboxEndDrag);
+    lightboxContent.addEventListener('touchend', lightboxEndDrag);
+    // Lightbox Swipe Functionality Ends Here
+
+    // Mouse events
+    sliderContainer.addEventListener('mousedown', startDrag);
+    sliderContainer.addEventListener('mousemove', drag);
+    sliderContainer.addEventListener('mouseup', endDrag);
+    sliderContainer.addEventListener('mouseleave', endDrag);
+    
+    // Touch events
+    sliderContainer.addEventListener('touchstart', startDrag, { passive: true });
+    sliderContainer.addEventListener('touchmove', drag, { passive: true });
+    sliderContainer.addEventListener('touchend', endDrag);
+
+    // Auto-advance functionality (optional)
+    let autoAdvanceInterval;
+    const startAutoAdvance = () => {
+        autoAdvanceInterval = setInterval(() => {
+            if (!isDragging && !lightbox.classList.contains('active')) {
+                goToSlide((currentIndex + 1) % slides.length);
+            }
+        }, 8000);
+    };
+    
+    const stopAutoAdvance = () => {
+        if (autoAdvanceInterval) {
+            clearInterval(autoAdvanceInterval);
+            autoAdvanceInterval = null;
+        }
+    };
+    
+    // Start auto-advance
+    startAutoAdvance();
+    
+    // Stop auto-advance on user interaction
+    [sliderContainer, prevBtn, nextBtn, ...dots].forEach(el => {
+        el.addEventListener('mouseenter', stopAutoAdvance);
+        el.addEventListener('mouseleave', startAutoAdvance);
+    });
+
+    // Handle transition end
+    track.addEventListener('transitionend', () => {
+        track.classList.remove('transitioning');
+    });
+
+    // Initialize first slide
+    goToSlide(0);
+
+    // Fade in the page
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+    
+    // Performance optimization: Pause animations when page is not visible
+    document.addEventListener('visibilitychange', () => {
+        const backgroundElements = document.querySelectorAll('.bg-shape, .particle, .glow-orb');
+        if (document.hidden) {
+            backgroundElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+            });
+            stopAutoAdvance();
+        } else {
+            backgroundElements.forEach(el => {
+                el.style.animationPlayState = 'running';
+            });
+            startAutoAdvance();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

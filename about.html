@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX MOTORS - About Us</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;700&display=swap');
+    :root { --font-primary: 'Inter', sans-serif; --font-display: 'Orbitron', monospace; --color-background: #0A0A0A; --color-surface: #121212; --color-text: #EAEAEA; --color-accent-orange: #ff6b35; --color-accent-gold: #FFD700; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-primary); background-color: var(--color-background); color: var(--color-text); }
+    .main-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; z-index: 100; background: rgba(10, 10, 10, 0.5); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .header-logo { text-decoration: none; }
+    .header-logo h1 { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.1em; background: linear-gradient(90deg, var(--color-accent-orange), var(--color-accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    /* Corrected Nav Styles */
+    .main-nav a { color: var(--color-text); text-decoration: none; margin-left: 3rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9rem; position: relative; padding-bottom: 8px; transition: color 0.3s ease; }
+    .main-nav a::after { content: ''; position: absolute; width: 100%; height: 2px; background: var(--color-accent-orange); bottom: 0; left: 0; transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+    .main-nav a:hover { color: var(--color-accent-orange); }
+    .main-nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .main-nav a.active { color: var(--color-accent-orange); }
+    .main-nav a.active::after { transform: scaleX(1); }
+
+    .page-content { padding: 10rem 4rem 4rem; max-width: 1200px; margin: 0 auto; } .about-section { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; margin-bottom: 5rem; } .about-image img { width: 100%; border-radius: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); } .about-text h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 1.5rem; } .about-text p { font-size: 1rem; color: #b3b3b3; line-height: 1.8; margin-bottom: 1rem; } .main-footer { text-align: center; padding: 2rem; background: var(--color-surface); margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    @media (max-width: 900px) { .main-header { padding: 1.5rem 2rem; } .main-nav { display: none; } .page-content { padding: 8rem 2rem 2rem; } .about-section { grid-template-columns: 1fr; } .about-image { display: none; } }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <a href="splash_screen.html" class="header-logo"><h1>APEX MOTORS</h1></a>
+    <nav class="main-nav">
+      <a href="showroom.html">Showroom</a><a href="about.html" class="active">About</a><a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page-content">
+    <section class="about-section">
+      <div class="about-text">
+        <h2>Our Vision</h2>
+        <p>APEX MOTORS was founded on a singular vision: to curate a collection of the world's most exceptional automobiles and deliver an acquisition experience that is as flawless as the machines we represent. We are not merely a dealership; we are custodians of automotive art, dedicated to the pursuit of performance, luxury, and innovation.</p>
+        <p>Our philosophy is centered on a deep respect for engineering and design, connecting discerning clients with vehicles that define their era.</p>
+      </div>
+      <div class="about-image"><img src="images/splash_screen.jpg" alt="Luxury car interior"></div>
+    </section>
+    <section class="about-section">
+      <div class="about-image"><img src="images/Huracán_EVO_3.jpg" alt="Sports car on a road"></div>
+      <div class="about-text">
+        <h2>The Apex Difference</h2>
+        <p>What sets APEX MOTORS apart is our unwavering commitment to quality and expertise. Each vehicle in our showroom is meticulously selected, inspected, and prepared to meet the highest possible standards. Our team possesses an unparalleled knowledge of the automotive landscape, providing expert consultation to ensure a perfect match between driver and vehicle.</p>
+        <p>We believe that purchasing a supercar should be a memorable event, and we strive to make every interaction seamless, private, and exceptional.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <p>&copy; 2024 APEX MOTORS. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>

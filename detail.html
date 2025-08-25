@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX MOTORS - Vehicle Details</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;700&display=swap');
+    :root { --font-primary: 'Inter', sans-serif; --font-display: 'Orbitron', monospace; --color-background: #0A0A0A; --color-surface: #121212; --color-text: #EAEAEA; --color-accent-orange: #ff6b35; --color-accent-gold: #FFD700; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-primary); background-color: var(--color-background); color: var(--color-text); }
+    .main-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; z-index: 1000; background: rgba(10, 10, 10, 0.5); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .header-logo { text-decoration: none; }
+    .header-logo h1 { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.1em; background: linear-gradient(90deg, var(--color-accent-orange), var(--color-accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    /* Corrected Nav Styles */
+    .main-nav a { color: var(--color-text); text-decoration: none; margin-left: 3rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9rem; position: relative; padding-bottom: 8px; transition: color 0.3s ease; }
+    .main-nav a::after { content: ''; position: absolute; width: 100%; height: 2px; background: var(--color-accent-orange); bottom: 0; left: 0; transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+    .main-nav a:hover { color: var(--color-accent-orange); }
+    .main-nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .main-nav a.active { color: var(--color-accent-orange); }
+    .main-nav a.active::after { transform: scaleX(1); }
+
+    .hero-section { height: 70vh; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 8rem; } .hero-section h1 { font-family: var(--font-display); font-size: 4rem; letter-spacing: 0.1em; } .hero-section p { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.2em; color: #ccc; } .page-content { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; } .gallery-section { margin-bottom: 4rem; } .main-image-container { margin-bottom: 1rem; border-radius: 10px; overflow: hidden; } .main-image { width: 100%; height: auto; display: block; transition: opacity 0.4s ease-in-out; } .thumbnail-container { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; } .thumbnail { width: 100%; height: auto; border-radius: 5px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.3s, transform 0.3s, opacity 0.3s; opacity: 0.7; } .thumbnail:hover { transform: scale(1.05); opacity: 1; } .thumbnail.active { border-color: var(--color-accent-orange); opacity: 1; } .specs-section { margin-bottom: 4rem; } .section-title { font-family: var(--font-display); font-size: 2.5rem; text-align: center; margin-bottom: 3rem; letter-spacing: 0.05em; } .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; } .spec-item { background: var(--color-surface); padding: 2rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); } .spec-item svg { width: 40px; height: 40px; margin-bottom: 1rem; color: var(--color-accent-orange); } .spec-item h4 { font-size: 1rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; } .spec-item p { font-family: var(--font-display); font-size: 1.5rem; } .description-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; background: var(--color-surface); padding: 3rem; border-radius: 10px; margin-bottom: 4rem; } .description-image img { width: 100%; border-radius: 10px; } .description-text h3 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 1.5rem; } .description-text p { color: #b3b3b3; line-height: 1.8; } .cta-section { text-align: center; background: var(--color-surface); padding: 3rem; border-radius: 10px; } .cta-section h3 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 1rem; } .cta-section p { color: #b3b3b3; margin-bottom: 2rem; } .cta-button { display: inline-block; font-family: var(--font-display); text-decoration: none; color: var(--color-text); background: var(--color-accent-orange); padding: 1rem 3rem; border-radius: 50px; transition: all 0.4s ease; font-size: 1.1rem; border: none; } .cta-button:hover { background: #fff; color: #000; box-shadow: 0 0 25px var(--color-accent-orange); transform: translateY(-2px) scale(1.05); } .main-footer { text-align: center; padding: 2rem; background: var(--color-surface); margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    @media (max-width: 900px) { .main-header { padding: 1.5rem 2rem; } .main-nav { display: none; } .hero-section { height: 50vh; } .hero-section h1 { font-size: 2.5rem; } .page-content { padding: 2rem 1rem; } .thumbnail-container { grid-template-columns: repeat(3, 1fr); } .description-section { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <a href="splash_screen.html" class="header-logo"><h1>APEX MOTORS</h1></a>
+    <nav class="main-nav">
+      <a href="showroom.html" class="active">Showroom</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section" id="hero-section">
+      <p id="hero-year">Car Brand</p>
+      <h1 id="hero-name">Car Model</h1>
+    </section>
+    <div class="page-content">
+      <section class="gallery-section">
+        <div class="main-image-container"><img src="" alt="Main car view" id="main-car-image"></div>
+        <div class="thumbnail-container" id="thumbnail-gallery"></div>
+      </section>
+      <section class="specs-section">
+        <h2 class="section-title">Performance Specs</h2>
+        <div class="specs-grid" id="specs-grid"></div>
+      </section>
+      <section class="description-section">
+        <div class="description-text">
+          <h3 id="description-title"></h3>
+          <p id="description-p"></p>
+        </div>
+        <div class="description-image"><img src="" alt="Detail shot" id="description-image"></div>
+      </section>
+      <section class="cta-section">
+          <h3>Experience This Machine</h3>
+          <p>Arrange a private viewing or speak with our specialists to learn more about this masterpiece of performance engineering.</p>
+          <a href="contact.html" class="cta-button">Inquire Now</a>
+      </section>
+    </div>
+  </main>
+  
+  <footer class="main-footer">
+    <p>&copy; 2024 APEX MOTORS. All Rights Reserved.</p>
+  </footer>
+
+<script>
+// The script is identical to the previous version
+const carData = [ { year: 'Ferrari', name: 'F8 Tributo', shortName: 'F8', shortDescription: 'A celebration of excellence and a tribute to the most powerful V8 in Ferrari history.', longDescription: 'The Ferrari F8 Tributo is a direct homage to the most powerful V8 engine in Maranello\'s history. It sets the benchmark for performance, driving pleasure, and ease of handling. The car’s design is a bridge to a new design language, with aerodynamics at its core, while still paying tribute to the legendary models of the past.', descriptionTitle: 'A Tribute to Excellence', images: [ 'images/Ferrari_F8_21_1.jpg', 'images/Ferrari_F8_21_2.jpg', 'images/Ferrari_F8_21_3.jpg', 'images/Ferrari_F8_21_4.jpg', 'images/Ferrari_F8_21_5.jpg', 'images/Ferrari_F8_21_6.jpg' ], specs: { engine: '3.9L Twin-Turbo V8', power: '710 HP', zeroToSixty: '2.9s', topSpeed: '211 MPH' } }, { year: 'McLaren', name: 'GT by MSO', shortName: 'GT', shortDescription: 'A bespoke creation by McLaren Special Operations, combining comfort with lightweight agility.', longDescription: 'The McLaren GT by MSO redefines the concept of a grand tourer. It combines continent-crossing comfort with the lightweight construction and thrilling dynamics of a supercar. Created by McLaren Special Operations, this unique vehicle features bespoke materials and a design that is both elegant and brutally efficient.', descriptionTitle: 'The Supercar, Redefined', images: [ 'images/GT_by_MSO__77_1.jpg', 'images/GT_by_MSO__77_2.jpg', 'images/GT_by_MSO__77_3.jpg', 'images/GT_by_MSO__77_4.jpg', 'images/GT_by_MSO__77_5.jpg', 'images/GT_by_MSO__77_6.jpg', 'images/GT_by_MSO__77_7.jpg' ], specs: { engine: '4.0L Twin-Turbo V8', power: '612 HP', zeroToSixty: '3.1s', topSpeed: '203 MPH' } }, { year: 'Mercedes-AMG', name: 'G63', shortName: 'G63', shortDescription: 'An icon of off-road performance with a commanding presence and handcrafted luxury.', longDescription: 'The Mercedes-AMG G63 is an icon of capability and luxury. Its unmistakable design is matched by a handcrafted biturbo V8 that delivers immense power. With three locking differentials and a rugged ladder frame, its off-road prowess is legendary, while the cabin offers a sanctuary of modern technology and exquisite materials.', descriptionTitle: 'Power, In Its Purest Form', images: [ 'images/G63_AMG_1.jpg', 'images/G63_AMG_2.jpg', 'images/G63_AMG_3.jpg', 'images/G63_AMG_4.jpg', 'images/G63_AMG_5.jpg', 'images/G63_AMG_6.jpg' ], specs: { engine: '4.0L Twin-Turbo V8', power: '577 HP', zeroToSixty: '4.5s', topSpeed: '137 MPH' } }, { year: 'Bentley', name: 'Continental GT', shortName: 'GT', shortDescription: 'Experience open-air grand touring with elegant design and thrilling performance.', longDescription: 'The quintessential grand tourer, the Bentley Continental GT Convertible offers an exhilarating open-air experience. It is a masterpiece of design, craftsmanship, and engineering, delivering a journey of unparalleled comfort and performance. Every detail is meticulously crafted, from the powerful W12 engine to the handcrafted leather interior.', descriptionTitle: 'The Pinnacle of Grand Touring', images: [ 'images/GT_Convertible_1.jpg', 'images/GT_Convertible_2.jpg', 'images/GT_Convertible_3.jpg', 'images/GT_Convertible_4.jpg', 'images/GT_Convertible_5.jpg' ], specs: { engine: '6.0L Twin-Turbo W12', power: '626 HP', zeroToSixty: '3.7s', topSpeed: '207 MPH' } }, { year: 'Lamborghini', name: 'Huracán EVO', shortName: 'EVO', shortDescription: 'Engineered to amplify your driving experience with a powerful V10 engine for pure emotion.', longDescription: 'The Huracán EVO is the evolution of the most successful V10 in Lamborghini history. It is a supercar that anticipates your moves to offer an unprecedented driving experience. Its design is a natural evolution of the Huracán’s iconic lines, with sophisticated aerodynamic solutions that create an aggressive yet elegant profile.', descriptionTitle: 'Taste the Raw Emotion', images: [ 'images/Huracán_EVO_1.jpg', 'images/Huracán_EVO_2.jpg', 'images/Huracán_EVO_3.jpg', 'images/Huracán_EVO_4.jpg', 'images/Huracán_EVO_5.jpg', 'images/Huracán_EVO_6.jpg' ], specs: { engine: '5.2L V10', power: '631 HP', zeroToSixty: '2.9s', topSpeed: '202 MPH' } }, { year: 'Rolls-Royce', name: 'Phantom SWB', shortName: 'PHANTOM', shortDescription: 'The pinnacle of automotive luxury and comfort. A sanctuary of bespoke craftsmanship.', longDescription: 'The Rolls-Royce Phantom is the definitive statement of luxury. It is a sanctuary of tranquility, featuring the signature Magic Carpet Ride that isolates occupants from the outside world. From the starlight headliner to the bespoke gallery, every element is crafted to the owner’s exact specifications, making each Phantom a unique work of art.', descriptionTitle: 'A World of Pure Serenity', images: [ 'images/RR_Phantom_SWB_22.jpg', 'images/RR_Phantom_SWB_22_2.jpg', 'images/RR_Phantom_SWB_22_3.jpg', 'images/RR_Phantom_SWB_22_4.jpg', 'images/RR_Phantom_SWB_22_5.jpg', 'images/RR_Phantom_SWB_22_6.jpg' ], specs: { engine: '6.75L Twin-Turbo V12', power: '563 HP', zeroToSixty: '5.1s', topSpeed: '155 MPH' } } ];
+document.addEventListener('DOMContentLoaded', () => {
+    const carIndex = sessionStorage.getItem('selectedCarIndex');
+
+    // Check if carIndex exists and is a valid index
+    if (carIndex !== null && carIndex >= 0 && carIndex < carData.length) {
+        const car = carData[carIndex];
+
+        document.title = `APEX MOTORS - ${car.name}`;
+        document.getElementById('hero-section').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url('${car.images[1] || car.images[0]}')`;
+        document.getElementById('hero-year').textContent = car.year;
+        document.getElementById('hero-name').textContent = car.name;
+
+        const mainImage = document.getElementById('main-car-image');
+        const thumbnailGallery = document.getElementById('thumbnail-gallery');
+
+        mainImage.src = car.images[0];
+
+        thumbnailGallery.innerHTML = '';
+        car.images.forEach((imgSrc, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgSrc;
+            thumb.alt = `Thumbnail ${index + 1}`;
+            thumb.className = 'thumbnail';
+            if (index === 0) thumb.classList.add('active');
+            thumbnailGallery.appendChild(thumb);
+        });
+
+        const specsGrid = document.getElementById('specs-grid');
+        specsGrid.innerHTML = `
+            <div class="spec-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg><h4>Engine</h4><p>${car.specs.engine}</p></div>
+            <div class="spec-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg><h4>Power</h4><p>${car.specs.power}</p></div>
+            <div class="spec-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><h4>0-60 MPH</h4><p>${car.specs.zeroToSixty}</p></div>
+            <div class="spec-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg><h4>Top Speed</h4><p>${car.specs.topSpeed}</p></div>`;
+
+        document.getElementById('description-title').textContent = car.descriptionTitle;
+        document.getElementById('description-p').textContent = car.longDescription;
+        document.getElementById('description-image').src = car.images[2] || car.images[0];
+
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                thumbnails.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                mainImage.style.opacity = '0';
+                setTimeout(() => {
+                    mainImage.src = this.src;
+                    mainImage.style.opacity = '1';
+                }, 300);
+            });
+        });
+    } else {
+        // Handle the case where carIndex is not found or is invalid
+        console.error('Invalid carIndex:', carIndex);
+        // You might want to redirect the user back to the showroom or display an error message
+        window.location.href = 'showroom.html'; // Redirect to showroom
+    }
+
+     // Remove the item from sessionStorage after using it
+    sessionStorage.removeItem('selectedCarIndex');
+});
+</script>
+
+</body>
+</html>
